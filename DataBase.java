@@ -14,6 +14,18 @@ public class DataBase {
         }
     }
 
+    public void selectAll() {
+        try (Statement stmt = con.createStatement();
+             ResultSet res = stmt.executeQuery("select name_, id from game")) {
+            while (res.next()) {
+                System.out.print(res.getString(2) + "  ");
+                System.out.println(res.getString(1));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public void insert(String name, String id) {
         try (PreparedStatement preSt = con.prepareStatement("insert into game (name_, id) values (?, ?)")) {
             preSt.setString(1, name);
