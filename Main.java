@@ -24,8 +24,7 @@ public class Main {
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
-
-
+            //fixing a bug
             //executeUpdate PreparedStatement
             try (PreparedStatement preSt = con.prepareStatement("insert into game (name_, id) values (?, ?)")) {
                 preSt.setString(1, "game");
@@ -37,6 +36,8 @@ public class Main {
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
+            //fixing a bug
+            //fixing a bug
         }
     }
 }
