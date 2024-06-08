@@ -15,7 +15,7 @@ public class DataBase {
         try (Statement stmt = con.createStatement();
              ResultSet res = stmt.executeQuery("select name_, id from game")) {
             while (res.next()) {
-                System.out.print(res.getString(2) + "  ");
+                System.out.print(res.getInt(2) + "  ");
                 System.out.println(res.getString(1));
             }
         } catch (SQLException e) {
@@ -23,10 +23,19 @@ public class DataBase {
         }
     }
 
-    public void insert(String name, String id) {
+    public void insert(String name, int id) {
         try (PreparedStatement preSt = con.prepareStatement("insert into game (name_, id) values (?, ?)")) {
             preSt.setString(1, name);
-            preSt.setString(1, id);
+            preSt.setInt(2, id);
+            System.out.print(preSt.getUpdateCount());
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void insert(String name) {
+        try (PreparedStatement preSt = con.prepareStatement("insert into game (name_) values (?)")) {
+            preSt.setString(1, name);
             System.out.print(preSt.getUpdateCount());
         } catch (SQLException e) {
             throw new RuntimeException(e);
