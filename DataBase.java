@@ -27,6 +27,7 @@ public class DataBase {
         try (PreparedStatement preSt = con.prepareStatement("insert into game (name_, id) values (?, ?)")) {
             preSt.setString(1, name);
             preSt.setInt(2, id);
+            preSt.executeUpdate();
             System.out.print(preSt.getUpdateCount());
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -36,7 +37,19 @@ public class DataBase {
     public void insert(String name) {
         try (PreparedStatement preSt = con.prepareStatement("insert into game (name_) values (?)")) {
             preSt.setString(1, name);
+            preSt.executeUpdate();
             System.out.print(preSt.getUpdateCount());
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void delete(int id) {
+        String sqlDel = "delete from game where id = ?";
+        try (PreparedStatement preSt = con.prepareStatement(sqlDel)) {
+            preSt.setInt(1, id);
+            preSt.executeUpdate();
+            System.out.println(preSt.getUpdateCount());
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

@@ -3,6 +3,14 @@ import java.sql.*;
 public class Main {
 
     public static void main(String[] args) {
+        DataBase db = new DataBase();
+        db.selectAll();
+        db.delete(1);
+        db.selectAll();
+        db.closeCon();
+    }
+
+    public static void notForUsing(String[] args) {
         try (Connection con = DriverManager
                 .getConnection("jdbc:postgresql://localhost:5432/base1", "username", "pass")) {
 
