@@ -18,6 +18,7 @@ public class DataBase {
                 System.out.print(res.getInt(2) + "  ");
                 System.out.println(res.getString(1));
             }
+            System.out.println();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -28,7 +29,7 @@ public class DataBase {
             preSt.setString(1, name);
             preSt.setInt(2, id);
             preSt.executeUpdate();
-            System.out.print(preSt.getUpdateCount());
+            System.out.println(preSt.getUpdateCount());
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -38,7 +39,7 @@ public class DataBase {
         try (PreparedStatement preSt = con.prepareStatement("insert into game (name_) values (?)")) {
             preSt.setString(1, name);
             preSt.executeUpdate();
-            System.out.print(preSt.getUpdateCount());
+            System.out.println(preSt.getUpdateCount());
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
